@@ -9,8 +9,10 @@ Just plug your android devices to machine and run tests.
 
 ## Setup
 - Install java and set java path in system variable.
+- Install Maven and set its path in system variable.
 - Set ADT bundle path in system variable.
 - Install Nodejs and set path in system variable.
+- Open the project in eclipse and configure the project to maven project
 
 ## Setting Appium server
 - Open command propmt/Terminal.
@@ -19,6 +21,3 @@ Just plug your android devices to machine and run tests.
 - If you got output as following  then appium server started correctly
 - [Appium] Welcome to Appium v1.6.3
 - [Appium] Appium REST http interface listener started on 0.0.0.0:4723
-
-
-
