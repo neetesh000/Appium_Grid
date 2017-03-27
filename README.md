@@ -17,9 +17,8 @@ Just plug your android devices to machine and run tests.
 - Hit command <code>npm install -g appium</code> (It will take 10-15 minutes to complete)
 - Verify appium server by command <code>appium</code>
 - If you got output as following  then appium server started correctly
-- <code> info: Welcome to Appium v1.6.3 (REV a124a15677e26b33db16e81c4b3b34d9c6b8cac9) </code>
-- <code> info: Appium REST http interface listener started on 0.0.0.0:4723 </code>
-- <code> info: Console LogLevel: debug </code>
+- [Appium] Welcome to Appium v1.6.3
+- [Appium] Appium REST http interface listener started on 0.0.0.0:4723
 
 
 
