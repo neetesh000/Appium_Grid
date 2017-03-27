@@ -32,10 +32,5 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 			<artifactId>java-client</artifactId>
 			<version>4.1.2</version>
 		</dependency>
-		<dependency>
-			<groupId>org.testng</groupId>
-			<artifactId>testng</artifactId>
-			<version>LATEST</version>
-		</dependency>
 	</dependencies>
 </project>

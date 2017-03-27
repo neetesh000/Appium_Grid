@@ -3,6 +3,8 @@ package libs;
 import java.io.File;
 import java.io.IOException;
 
+import org.apache.commons.io.FileUtils;
+
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.AndroidServerFlag;
@@ -19,26 +21,36 @@ public class AppiumManager {
 	String port;
 	String chromePort;
 	String bootstrapPort;
-	File logFile;
 	
-	private AppiumDriverLocalService appiumService;
+	AppiumDriverLocalService appiumService;
 
 	/**
 	 * start appium with auto generated ports : appium port, chrome port, and
 	 * bootstap port
 	 * @throws IOException 
 	 */
+	
+	static {
+		File appiumLogsDirectrory = new File("appium_logs");
+		
+		if(appiumLogsDirectrory.exists()){
+			try {
+				FileUtils.forceDelete(appiumLogsDirectrory);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		appiumLogsDirectrory.mkdir();
+	}
+	
 	public String startAppium() throws IOException {
 		// start appium server
 		port = ap.getPort();
 		chromePort = ap.getPort();
 		bootstrapPort = ap.getPort();
-		
-		logFile = new File("appium_port_" + port + ".log");
-		
-		logFile.createNewFile();
 
-		File logFile = new File("appium_port_" + port + ".log");
+		File logFile = new File("appium_logs/appium_port_" + port + ".log");
 		
 		logFile.createNewFile();
 
@@ -61,8 +73,7 @@ public class AppiumManager {
 	}
 
 	public void killServer() {
-		System.out.println();
-		if(appiumService.isRunning()){
+		if(appiumService!=null && appiumService.isRunning()){
 			appiumService.stop();
 		}
 		
