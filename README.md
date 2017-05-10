@@ -7,6 +7,7 @@ Just plug your android devices to machine and run tests.
 - Nodejs <a href="https://nodejs.org/en/blog/release/v6.10.1/" target="_blank">(v6.10.1)</a>
 - Android SDK
 - Appium
+- Apache Maven
 
 ## Setup
 - Install java and set java path in system variable.
