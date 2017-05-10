@@ -1,21 +1,17 @@
-package libs;
+package test.android.utility;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * DeviceConfiguration - this class contains methods to start adb server, to get connected devices and their information.   
- */
 public class DeviceConfiguration {
 
 	CommandPrompt cmd = new CommandPrompt();
 	List<Device> devices = new ArrayList<>();
 	
-	/**
-	 * This method start adb server
-	 */
-	public void startADB() throws Exception{
-		String output = cmd.getProcessOutput(cmd.runCommand("adb start-server"));
+	public void startADB() throws InterruptedException, IOException {
+		Process p = cmd.runCommand("adb start-server");
+		String output = cmd.getProcessOutput(p);
 		String[] lines = output.split("\n");
 		if(lines.length==1)
 			System.out.println("adb service already started");
@@ -23,22 +19,15 @@ public class DeviceConfiguration {
 			System.out.println("adb service started");
 		else if(lines[0].contains("internal or external command")){
 			System.out.println("adb path not set in system varibale");
-			System.exit(0);
+			throw new RuntimeException("adb path not set in system varibale");
 		}
 	}
 	
-	/**
-	 * This method stop adb server
-	 */
-	public void stopADB() throws Exception{
+	public void stopADB() throws InterruptedException, IOException {
 		cmd.runCommand("adb kill-server");
 	}
 	
-	/**
-	 * This method return connected devices
-	 * @return hashmap of connected devices information
-	 */
-	public List<Device> getDivces() throws Exception	{
+	public List<Device> getDivces() throws IOException, InterruptedException{
 		
 		startADB(); // start adb service
 		String output = cmd.getProcessOutput(cmd.runCommand("adb devices"));
@@ -47,7 +36,7 @@ public class DeviceConfiguration {
 		if(lines.length<=1){
 			System.out.println("No Device Connected");
 			stopADB();
-			System.exit(0);	// exit if no connected devices found
+			throw new RuntimeException("No device is connected");
 		}
 		
 		for(int i=1;i<lines.length;i++){
@@ -56,9 +45,9 @@ public class DeviceConfiguration {
 			if(lines[i].contains("device")){
 				lines[i]=lines[i].replaceAll("device", "");
 				String deviceID = lines[i];
-				String model = cmd.getProcessOutput(cmd.runCommand("adb -s "+deviceID+" shell getprop ro.product.model")).replaceAll("\\s+", "");
-				String brand = cmd.getProcessOutput(cmd.runCommand("adb -s "+deviceID+" shell getprop ro.product.brand")).replaceAll("\\s+", "");
-				String osVersion = cmd.getProcessOutput(cmd.runCommand("adb -s "+deviceID+" shell getprop ro.build.version.release")).replaceAll("\\s+", "");
+				String model =cmd.runCommandAndGetProcessOutput("adb -s "+deviceID+" shell getprop ro.product.model").replaceAll("\\s+", "");
+				String brand = cmd.runCommandAndGetProcessOutput("adb -s "+deviceID+" shell getprop ro.product.brand").replaceAll("\\s+", "");
+				String osVersion = cmd.runCommandAndGetProcessOutput("adb -s "+deviceID+" shell getprop ro.build.version.release").replaceAll("\\s+", "");
 				
 				Device device = new Device(model, brand, osVersion, deviceID);
 				
@@ -83,10 +72,4 @@ public class DeviceConfiguration {
 		return devices;
 	}
 	
-//	public static void main(String[] args) throws Exception {
-//		DeviceConfiguration gd = new DeviceConfiguration();
-//		gd.startADB();	
-//		gd.getDivces();
-//		gd.stopADB();
-//	}
 }

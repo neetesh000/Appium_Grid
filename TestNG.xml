@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">  
+  <test name="device_1_test">
+		<parameter name="deviceId" value="emulator-5554" />
+		<parameter name="port" value="4723" />
+		<parameter name="bootStrapPort" value="4725" />
+		<classes>
+			<class name="test.android.calculator.tests.CalcExample"/>
+		</classes>
+	</test>
+	
+  <test name="device_2_test">
+		<parameter name="deviceId" value="emulator-5556" />
+		<parameter name="port" value="4727" />
+		<parameter name="bootStrapPort" value="4729" />
+		<classes>
+			<class name="test.android.calculator.tests.CalcExample"/>
+		</classes>
+	</test>
+</suite>
