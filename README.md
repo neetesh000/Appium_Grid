@@ -8,6 +8,9 @@ Just plug your android devices to machine and run tests.
 - Android SDK
 - Appium
 - Apache Maven
+- (Optional) Tesseract setup for OCR
+For Mac: http://emop.tamu.edu/Installing-Tesseract-Mac
+For Windows: http://emop.tamu.edu/Installing-Tesseract-Windows8
 
 ## Setup
 - Install java and set java path in system variable.
