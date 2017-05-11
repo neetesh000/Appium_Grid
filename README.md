@@ -1,6 +1,7 @@
-# Appium-Grid
+# Appium_Tests_Framework_For_Multiple_Devices
 Allows you to run automation test on multiple android devices (Real/Emulator) simultaneously.
-Just plug your android devices to machine and run tests.
+Just plug your android devices to machine and run tests. 
+By configuring the TestNG.xml file the framework can run all the tests on multiple devices simultanuously for device coverage or can distribute the tests on multiple devices to finish the testing earlier.
 
 ## Requirements:
 - Java
